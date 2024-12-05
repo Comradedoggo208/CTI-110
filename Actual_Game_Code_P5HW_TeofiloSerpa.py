@@ -70,7 +70,49 @@ class Character:
 
     def is_defeated(self):
         return self.health <= 0
-    
+
+#Pre-determined class
+class Warrior(Character):
+    def __init__(self):
+        super().__init__(
+            name="Warrior",
+            health=150,
+            attack_power=20,
+            special_move={"name": "Berserker Rage", "damage": 55}
+        )
+
+
+class Dark_Heart(Character):
+    def __init__(self):
+        super().__init__(
+            name="Dark_Heart",
+            health=160,
+            attack_power=20,
+            special_move={"name": "Darkness Grap", "damage": 65}
+        )
+
+class Gun_Messia(Character):
+    def __init__(self):
+        super().__init__(
+            name="Gun_Messia",
+            health=125,
+            attack_power=25,
+            special_move={"name": "Deus Ex Machina", "damage": 75}
+        )
+
+class Laid_Back_Vampire(Character):
+    def __init__(self):
+        super().__init__(
+            name="Laid_Back_Vampire",
+            health=200,
+            attack_power=20,
+            special_move={"name": "Last Horizon", "damage": 75}
+        )
+
+
+
+
+
 # Game logic
 def create_custom_character():
     name = input("Enter your character's name: ")
@@ -136,37 +178,47 @@ def maybe_spawn_boss():
     return None
 
 
-def game (): 
+
+
+
+
+
+
+def game ():
+    Rematch = "YES!"
     print("Welcome to my wonderful Turn Based Fighting game!")
     player = create_custom_character()
     print(f"You have chosen the {player.name}!")
-        
-    boss = maybe_spawn_boss()
 
-    while boss and not boss.is_defeated() and not player.is_defeated():
-        print(f"\n{player.name} Health: {player.health} | {boss.name} Health: {boss.health}")
-        action = input("Choose your action (attack/shield/special): ").strip().lower()
-            
-        if action == "attack":
-                player.attack(boss)
-        elif action == "shield":
-                player.shield()
-        elif action == "special":
-                player.use_special_move(boss, all_characters=[player, boss])
-        else:
-            print("Invalid action. Try again.")
-            continue
+    while Rematch == "YES!":
+        boss = maybe_spawn_boss()
 
-        if boss.is_defeated():
-            print(f"You have defeated the {boss.name}!")
-            break
+        while boss and not boss.is_defeated() and not player.is_defeated():
+            print(f"\n{player.name} Health: {player.health} | {boss.name} Health: {boss.health}")
+            action = input("Choose your action (attack/shield/special): ").strip().lower()
+                
+            if action == "attack":
+                    player.attack(boss)
+            elif action == "shield":
+                    player.shield()
+            elif action == "special":
+                    player.use_special_move(boss, all_characters=[player, boss])
+            else:
+                print("Invalid action. Try again.")
+                continue
 
-        boss.random_attack(player)
-        if player.is_defeated():
-            print(f"You were defeated by the {boss.name}...")
+            if boss.is_defeated():
+                print(f"You have defeated the {boss.name}!")
+                break
 
-    if not boss:
-        print("You venture forth, but no boss appears. The journey continues!")
+            boss.random_attack(player)
+            if player.is_defeated():
+                print(f"You were defeated by the {boss.name}...")
+
+        if not boss:
+            print("You venture forth, but no boss appears. The journey continues!")
+        Rematch = input("Would you like to Rematch?('YES! or NO!'): ")
+    print("Thank you soo much for-a playing my game-a!")
 
 
 
