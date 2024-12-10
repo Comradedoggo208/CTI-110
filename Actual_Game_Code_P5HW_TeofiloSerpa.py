@@ -109,8 +109,32 @@ class Laid_Back_Vampire(Character):
             special_move={"name": "Last Horizon", "damage": 75}
         )
 
+class Mechanical_Nightmare(Character):
+    def __init__(self):
+        super().__init__(
+            name="Mechanical_Nightmare",
+            health=175,
+            attack_power=20,
+            special_move={"name": "Error_2bf", "damage": 67}
+        )
 
+class Dragon_like_Warrior(Character):
+    def __init__(self):
+        super().__init__(
+            name="Dragon_like_Warrior",
+            health=195,
+            attack_power=20,
+            special_move={"name": "DRAGON INSTALL", "damage": 75}
+        )
 
+class Yoyo_slinging_bounty_hunter(Character):
+    def __init__(self):
+        super().__init__(
+            name="Yoyo_slinging_bounty_hunter",
+            health=175,
+            attack_power=20,
+            special_move={"name": "Attack of the killer machine", "damage": 75}
+        )
 
 
 # Game logic
@@ -172,12 +196,44 @@ class DarkOverlord(Character):
         target.health -= damage
 
 def maybe_spawn_boss():
-    if random.randint(1, 100) <= 30:  # 30% chance
+    if random.randint(1, 100) <= 50:  # 50% chance
         print("The Dark Overlord has appeared!")
         return DarkOverlord()
     return None
 
 
+def choose_character():
+    print("Choose your character:")
+    print("1. Warrior")
+    print("2. Dark_Heart")
+    print("3. Gun_Messia")
+    print("4. Laid_Back_Vampire")
+    print("5. Mechanical_Nightmare")
+    print("6. Dragon_like_Warrior")
+    print("7.Yoyo_slinging_bounty_hunter")
+    print("8. Create a Custom Character")
+
+    choice = int(input("Enter the number of your choice: "))
+    
+    if choice == 1:
+        return Warrior()
+    elif choice == 2:
+        return Dark_Heart()
+    elif choice == 3:
+        return Gun_Messia()
+    elif choice == 4:
+        return Laid_Back_Vampire()
+    elif choice == 5:
+        return Mechanical_Nightmare()
+    elif choice == 6:
+        return Dragon_like_Warrior()
+    elif choice == 7:
+        return Yoyo_slinging_bounty_hunter()
+    elif choice == 8:
+        return create_custom_character()
+    else:
+        print("Invalid choice. Please try again.")
+        return choose_character()
 
 
 
@@ -187,7 +243,7 @@ def maybe_spawn_boss():
 def game ():
     Rematch = "YES!"
     print("Welcome to my wonderful Turn Based Fighting game!")
-    player = create_custom_character()
+    player = choose_character()
     print(f"You have chosen the {player.name}!")
 
     while Rematch == "YES!":
